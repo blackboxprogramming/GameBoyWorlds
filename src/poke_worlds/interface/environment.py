@@ -877,7 +877,7 @@ class DummyEnvironment(Environment):
         """
         screen_shape = emulator.screen_shape
         self.observation_space = gym.spaces.Box(
-            low=0, high=255, shape=(screen_shape[1], screen_shape[0], 1), dtype=np.uint8
+            low=0, high=255, shape=(screen_shape[1], screen_shape[0]), dtype=np.uint8
         )
         """ The observation space is the raw pixel values of the emulator's screen. """
         super().__init__(
