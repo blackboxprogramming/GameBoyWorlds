@@ -365,6 +365,21 @@ class Emulator:
         """
         if init_state is None:
             return
+        if not init_state.endswith(".state"):
+            init_state = init_state + ".state"
+        states_path = self._parameters[f"{self.game}_rom_data_path"] + "/states/"
+        if not os.path.exists(init_state):
+            if states_path in init_state:
+                log_error(
+                    f"Initial state file {init_state} does not exist.", self._parameters
+                )
+            # try to resolve.
+
+            if states_path not in init_state:
+                potential_path = os.path.join(states_path, init_state)
+                if os.path.exists(potential_path):
+                    init_state = potential_path
+
         if not os.path.exists(init_state):
             log_error(
                 f"New initial state file {init_state} does not exist.", self._parameters

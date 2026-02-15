@@ -13,6 +13,7 @@ from poke_worlds.interface.environment import (
     DummyEnvironment,
     Environment,
     TestEnvironmentMixin,
+    TrainEnvironmentMixin,
 )
 from poke_worlds.interface.controller import Controller
 
@@ -46,6 +47,10 @@ class PokemonOCREnvironment(PokemonEnvironment):
 
 
 class PokemonTestEnvironment(TestEnvironmentMixin, PokemonOCREnvironment):
+    pass
+
+
+class PokemonTrainEnvironment(TrainEnvironmentMixin, PokemonOCREnvironment):
     pass
 
 

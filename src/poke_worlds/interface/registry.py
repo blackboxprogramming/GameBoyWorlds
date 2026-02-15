@@ -11,7 +11,6 @@ from poke_worlds.utils import (
     log_error,
     load_parameters,
     log_warn,
-    get_benchmark_tasks_df,
 )
 from poke_worlds.emulation.registry import (
     get_emulator,
@@ -29,11 +28,10 @@ from poke_worlds.interface.pokemon.environments import (
     PokemonOCREnvironment,
     PokemonRedExploreStartingSceneEnvironment,
     PokemonTestEnvironment,
+    PokemonTrainEnvironment,
 )
 from poke_worlds.interface.pokemon.controllers import PokemonStateWiseController
 
-import pandas as pd
-from gymnasium import register
 
 _project_parameters = load_parameters()
 
@@ -46,31 +44,37 @@ AVAILABLE_ENVIRONMENTS: Dict[str, Dict[str, Type[Environment]]] = {
         "charmander_easy": PokemonRedChooseCharmanderEasyEnvironment,
         "charmander_hard": PokemonRedChooseCharmanderHardEnvironment,
         "starter_explore": PokemonRedExploreStartingSceneEnvironment,
+        "train": PokemonTrainEnvironment,
         "test": PokemonTestEnvironment,
     },
     "pokemon_brown": {
         "default": PokemonOCREnvironment,
         "basic": PokemonEnvironment,
+        "train": PokemonTrainEnvironment,
         "test": PokemonTestEnvironment,
     },
     "pokemon_starbeasts": {
         "default": PokemonOCREnvironment,
         "basic": PokemonEnvironment,
+        "train": PokemonTrainEnvironment,
         "test": PokemonTestEnvironment,
     },
     "pokemon_crystal": {
         "default": PokemonOCREnvironment,
         "basic": PokemonEnvironment,
+        "train": PokemonTrainEnvironment,
         "test": PokemonTestEnvironment,
     },
     "pokemon_prism": {
         "default": PokemonOCREnvironment,
         "basic": PokemonEnvironment,
+        "train": PokemonTrainEnvironment,
         "test": PokemonTestEnvironment,
     },
     "pokemon_fools_gold": {
         "default": PokemonOCREnvironment,
         "basic": PokemonEnvironment,
+        "train": PokemonTrainEnvironment,
         "test": PokemonTestEnvironment,
     },
     "legend_of_zelda": {
@@ -209,28 +213,6 @@ def get_environment(
     return environment_class(
         emulator=emulator, controller=controller, parameters=parameters
     )
-
-
-def get_benchmark_tasks(game: str, parameters: dict = None) -> pd.DataFrame:
-    """
-    Loads the benchmark tasks for the specified game from the benchmark_tests/tasks.csv file
-
-    Args:
-        game (str): The variant of the game to get benchmark tasks for.
-        parameters (dict, optional): Additional parameters for error logging.
-
-    Returns:
-        pd.DataFrame: DataFrame containing the benchmark tasks for the specified game.
-    """
-    parameters = load_parameters(parameters)
-    tasks_df = get_benchmark_tasks_df(parameters)
-    game_tasks_df = tasks_df[tasks_df["game"] == game]
-    if len(game_tasks_df) == 0:
-        log_error(
-            f"No benchmark tasks found for game variant '{game}'. Please ensure that the tasks.csv file contains tasks for this game.",
-            parameters,
-        )
-    return game_tasks_df
 
 
 def get_test_environment(
