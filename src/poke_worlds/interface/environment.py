@@ -570,6 +570,7 @@ class Environment(gym.Env, ABC):
             reward = self.determine_reward(start_state=start_state) - abs(
                 self._parameters["invalid_action_penalty"]
             )
+            current_state["invalid_action"] = True
             return observation, reward, terminated, truncated, current_state
         self.after_step(start_state, action, kwargs, transition_states, action_success)
         truncated = self.determine_truncated(
