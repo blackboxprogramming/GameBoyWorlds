@@ -266,6 +266,26 @@ class NamedScreenRegion:
         self.target = None
         return result
 
+    def matches_any_multi_target(
+        self, target_names: List[str], reference: np.ndarray, strict_shape: bool = True
+    ) -> bool:
+        """
+        Compares the given reference image to all of the specified target images and returns True if any of them match.
+
+        :param target_names: The names of the target images to compare against.
+        :type target_names: List[str]
+        :param reference: The reference image to compare.
+        :type reference: np.ndarray
+        :param strict_shape: Whether to error out if the array shapes do not match.
+        :type strict_shape: bool
+        :return: True if the AE is below the epsilon threshold for any of the target images, False otherwise.
+        :rtype: bool
+        """
+        for target_name in target_names:
+            if self.matches_multi_target(target_name, reference, strict_shape):
+                return True
+        return False
+
 
 class StateParser(ABC):
     """
