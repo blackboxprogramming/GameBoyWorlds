@@ -454,15 +454,13 @@ class Emulator:
             save_video = self._parameters["gameboy_default_save_video"]
         self.save_video = save_video
         """ Whether to save video of the episodes. """
-        self.video_writer = None
+        self.video_writer = VideoWriter(
+            session_path=self.session_path,
+            output_shape=self.output_shape,
+            reduce_resolution=self._reduce_video_resolution,
+            parameters=self._parameters,
+        )
         """ Holds the VideoWriter of this Emulator instance """
-        if self.save_video:
-            self.video_writer = VideoWriter(
-                session_path=self.session_path,
-                output_shape=self.output_shape,
-                reduce_resolution=self._reduce_video_resolution,
-                parameters=self._parameters,
-            )
 
         head = "null" if self.headless else "SDL2"
 
