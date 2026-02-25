@@ -22,6 +22,7 @@ jobs:
       - run: uv sync --extra vlm
       - run: |
           . .venv/bin/activate
+          echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENV
           echo PATH=$PATH >> $GITHUB_ENV
       - run: uv pip install -e ".[vlm]"
       - run: chmod +x ./quick_tests.sh
