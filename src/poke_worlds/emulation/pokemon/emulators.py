@@ -37,7 +37,7 @@ class PokemonEmulator(Emulator):
             next_frames = self.run_action_on_emulator(LowLevelActions.PRESS_BUTTON_A)
             all_next_frames.append(next_frames)
         if (
-            True
+            False
         ):  # Make this True to auto skip dialogue and accumilate it into the frames returned.
             current_state = self.state_parser.get_agent_state(current_frame)
             n_clicks = 0
