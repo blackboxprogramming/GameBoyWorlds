@@ -1,4 +1,4 @@
-from poke_worlds import get_emulator, AVAILABLE_GAMES
+from gameboy_worlds import get_emulator, AVAILABLE_GAMES
 import os
 import click
 

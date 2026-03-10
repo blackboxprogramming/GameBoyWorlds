@@ -1,6 +1,6 @@
 import click
-from poke_worlds import AVAILABLE_GAMES, get_available_init_states
-from poke_worlds.utils import log_info, log_error
+from gameboy_worlds import AVAILABLE_GAMES, get_available_init_states
+from gameboy_worlds.utils import log_info, log_error
 import pandas as pd
 
 

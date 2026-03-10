@@ -4,16 +4,16 @@
   </picture>
   <br>
   
-  **Building Intelligent and General Pokémon Agents**
+  **Building Intelligent and General GameBoy Agents**
   
   <br>
-    <a href="https://github.com/DhananjayAshok/PokeWorlds/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><img alt="GitHub" src="https://img.shields.io/badge/license-MIT-blue"></a>
+    <a href="https://github.com/DhananjayAshok/GameBoyWorlds/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><img alt="GitHub" src="https://img.shields.io/badge/license-MIT-blue"></a>
     <a href="https://dhananjayashok.github.io/" target="_blank" rel="noopener noreferrer"><img alt="Documentation" src="https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online"></a>
-    <a href="https://dhananjayashok.github.io/PokeWorlds/" target="_blank" rel="noopener noreferrer"><img alt="GitHub" src="https://img.shields.io/badge/documentation-pdoc-red"></a>
+    <a href="https://dhananjayashok.github.io/GameBoyWorlds/" target="_blank" rel="noopener noreferrer"><img alt="GitHub" src="https://img.shields.io/badge/documentation-pdoc-red"></a>
 </div>
 
 
-<img src="assets/logo.png" width="70px"> is an AI research framework for training and evaluating generally capable agents in the world of Pokémon, complete with flexible Python simulators and unified environment wrappers around Gen I and Gen II Pokémon games. 
+<img src="assets/logo.png" width="70px"> is an AI research framework for training and evaluating generally capable agents in the GameBoy Universe, complete with flexible Python simulators and unified environment wrappers around several GameBoy and GameBoy Color games. 
 
 ![](assets/worlds_random.gif)
 
@@ -73,8 +73,8 @@ source /path/to/env/bin/activate
 
 Then, clone the <img src="assets/logo.png" width="70"> repo and install it as a `pip` package:
 ```
-git clone https://github.com/DhananjayAshok/PokeWorlds
-cd PokeWorlds
+git clone https://github.com/DhananjayAshok/GameBoyWorlds
+cd GameBoyWorlds
 uv pip install -e "."
 ```
 
@@ -92,17 +92,15 @@ By default, this project assumes that you can store files and emulator outputs (
 
 When you are happy with the `storage` destination, run the following command:
 ```python
-bash sync_all.sh
-```
-If you do not have `bash` (e.g. on Windows), run:
-```python
 python -m gameboy_worlds.setup_data pull --game all
 ```
 
 
 ## ROM Setup
 
-Next, you must legally acquire ROMs for Pokémon from Nintendo (perhaps by dumping the ROM file from your own catridge). Despite how easy they are to obtain, we discourage any attempts to use <img src="assets/logo.png" width="70"> with unofficialy downloaded ROMs. The following base game ROMs are supported:
+Next, you must legally acquire ROMs for the GameBoy games from Nintendo (perhaps by dumping the ROM file from your own catridge). Despite how easy they are to obtain, we discourage any attempts to use <img src="assets/logo.png" width="70"> with unofficialy downloaded ROMs. The following game ROMs are supported:
+
+
 * Pokémon Red (save as `PokemonRed.gb`)
 * Pokémon Crystal (save as `PokemonCrystal.gbc`)
 

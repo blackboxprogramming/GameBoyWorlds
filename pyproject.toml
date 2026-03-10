@@ -1,7 +1,7 @@
 [project]
-name = "poke-worlds"
+name = "gameboy-worlds"
 version = "0.1.0"
-description = "Emulation, state parsing, low-level control and Gym environments for Gen I and Gen II Pokémon games"
+description = "Emulation, state parsing, low-level control and Gym environments for GameBoy games"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

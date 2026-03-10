@@ -1,7 +1,7 @@
-from poke_worlds.emulation.emulator import Emulator
-from poke_worlds import AVAILABLE_GAMES
-from poke_worlds.emulation.registry import GAME_TO_GB_NAME
-from poke_worlds.utils import load_parameters, log_error
+from gameboy_worlds.emulation.emulator import Emulator
+from gameboy_worlds import AVAILABLE_GAMES
+from gameboy_worlds.emulation.registry import GAME_TO_GB_NAME
+from gameboy_worlds.utils import load_parameters, log_error
 import click
 
 

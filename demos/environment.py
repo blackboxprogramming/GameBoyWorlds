@@ -1,4 +1,4 @@
-from poke_worlds import get_environment, AVAILABLE_GAMES
+from gameboy_worlds import get_environment, AVAILABLE_GAMES
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 import click
@@ -110,7 +110,9 @@ def main(
             plt.title("Rewards over Time")
             plt.show()
         else:
-            print(f"Episode finished after {steps} steps with total reward {sum(rewards)}")
+            print(
+                f"Episode finished after {steps} steps with total reward {sum(rewards)}"
+            )
     else:
         show_obs = show_mode == "obs"
         show_info = not show_obs

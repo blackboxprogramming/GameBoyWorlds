@@ -7,16 +7,16 @@
   **Actually Building Intelligent and General Pokémon Agents**
   
   <br>
-    <a href="https://github.com/DhananjayAshok/PokeWorlds/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><img alt="GitHub" src="https://img.shields.io/badge/license-MIT-blue"></a>
+    <a href="https://github.com/DhananjayAshok/GameBoyWorlds/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><img alt="GitHub" src="https://img.shields.io/badge/license-MIT-blue"></a>
     <a href="https://dhananjayashok.github.io/" target="_blank" rel="noopener noreferrer"><img alt="Documentation" src="https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online"></a>
-    <a href="https://dhananjayashok.github.io/PokeWorlds/" target="_blank" rel="noopener noreferrer"><img alt="GitHub" src="https://img.shields.io/badge/documentation-pdoc-red"></a>
+    <a href="https://dhananjayashok.github.io/GameBoyWorlds/" target="_blank" rel="noopener noreferrer"><img alt="GitHub" src="https://img.shields.io/badge/documentation-pdoc-red"></a>
 </div>
 
 <img src="assets/logo.png" width="70px"> is organized into 2 primary modules:
 * `emulation`: Handles GameBoy emulation, parsing and state tracking
 * `interface`: Implements high level actions, and Gym-compliant environments
 
-See the [API documentation](https://dhananjayashok.github.io/PokeWorlds/) to understand the code base, the rest of this document goes into details on how you would implement new features or test tasks in <img src="assets/logo.png" width="70">. 
+See the [API documentation](https://dhananjayashok.github.io/GameBoyWorlds/) to understand the code base, the rest of this document goes into details on how you would implement new features or test tasks in <img src="assets/logo.png" width="70">. 
 
   - [Custom Starting States](#I-want-to-create-my-own-starting-states)
   - [Descriptive State and Event Tracking](#I-want-to-track-fine-grained-details)
@@ -58,7 +58,7 @@ Whatever your motivation, <img src="assets/logo.png" width="70"> provides a powe
 
 The first thing to do is detect an event at a moment in time. This is done in subclasses of the `StateParser` [object](src/gameboy_worlds//emulation/emulator.py) in one of two ways: 
 
-1. **Emulator Screen Captures:** Often particular game states can be cleanly identified by a unique text popup, or some other characteristic marker on the screen. Any of these can be easily captured and checked with the existing parsing system. For example, the current implementation for Pokémon Red has screen captures set up to identify which starter the player chooses. See the [section below](#state-parser-set-up) for examples of this being done. See the [`StateParser` API documentation](https://dhananjayashok.github.io/PokeWorlds/gameboy_worlds/emulation/parser.html) for a quick overview on how this works.  
+1. **Emulator Screen Captures:** Often particular game states can be cleanly identified by a unique text popup, or some other characteristic marker on the screen. Any of these can be easily captured and checked with the existing parsing system. For example, the current implementation for Pokémon Red has screen captures set up to identify which starter the player chooses. See the [section below](#state-parser-set-up) for examples of this being done. See the [`StateParser` API documentation](https://dhananjayashok.github.io/GameBoyWorlds/gameboy_worlds/emulation/parser.html) for a quick overview on how this works.  
 2. **Memory Slot Hooks:** A strong alternative is to just directly read statistics from the game's WRAM. Visually inaccessible information (e.g. the attack stats of all Pokémon on the opponents team) are often easy to obtain this way. The only catch is, this method relies on knowing which memory slots to look for. That's easy enough for games which have excellent [decompilation guides](https://github.com/pret/pokered/blob/symbols/pokered.sym), but is much harder to do for ROM hacks which may mess around with the slots arbitrarily or less popular games. See the [memory reader](src/gameboy_worlds/emulation/pokemon/parsers.py) state parser to get a sense of how you should go about this. 
 
 These approaches allow your state parsers to give instant-wise decisions or indications when an event has occured. You can then configure your `StateTracker` to use the parser to check for this flag / read this information, and store appropriate metrics. See the existing [parsers](src/gameboy_worlds/emulation/pokemon/parsers.py) and [trackers](src/gameboy_worlds/emulation/pokemon/trackers.py) for examples. 
