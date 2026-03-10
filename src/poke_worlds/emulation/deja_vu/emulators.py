@@ -47,36 +47,24 @@ class DejaVuEmulator(Emulator):
             current_state = self.state_parser.get_agent_state(current_frame)
             n_clicks = 0
             # Clicks through any dialogue popups
-            while (
-                n_clicks < self._MAXIMUM_DIALOGUE_PRESSES
-            ) and current_state == AgentState.IN_DIALOGUE:
-                next_frames = self.run_action_on_emulator(
-                    LowLevelActions.PRESS_BUTTON_B
-                )
+            while n_clicks < self._MAXIMUM_DIALOGUE_PRESSES and current_state == AgentState.IN_DIALOGUE:
+                next_frames = self.run_action_on_emulator(LowLevelActions.PRESS_BUTTON_A)
                 current_state = self.state_parser.get_agent_state(next_frames[-1])
                 all_next_frames.append(next_frames)
                 n_clicks += 1
         
         if len(all_next_frames) > 1:
             frames = np.concatenate(all_next_frames)
-            self._update_listeners_after_actions(
-                self._get_unique_frames(frames[1:])
-            )  # Skip the first frame as that is already counted
+            self._update_listeners_after_actions(self._get_unique_frames(frames[1:]))  # Skip the first frame as that is already counted
             frames = self._get_unique_frames(frames)
         
         return frames, done
 
     def _open_to_first_state(self):
         self._pyboy.tick(10000, False)  # get to opening menu
-        self.run_action_on_emulator(
-            LowLevelActions.PRESS_BUTTON_A
-        )  # press A to get past opening menu
+        self.run_action_on_emulator(LowLevelActions.PRESS_BUTTON_A)  # press A to get past opening menu
         self._pyboy.tick(1000, False)  # wait for load
-        self.run_action_on_emulator(
-            LowLevelActions.PRESS_BUTTON_A
-        )  # press A to load game
+        self.run_action_on_emulator(LowLevelActions.PRESS_BUTTON_A) # press A to load game
         self._pyboy.tick(1000, False)  # wait for file select
-        self.run_action_on_emulator(
-            LowLevelActions.PRESS_BUTTON_A
-        )  # press A to confirm load
+        self.run_action_on_emulator(LowLevelActions.PRESS_BUTTON_A)  # press A to confirm load
         self._pyboy.tick(5000, False)  # wait for game to load
