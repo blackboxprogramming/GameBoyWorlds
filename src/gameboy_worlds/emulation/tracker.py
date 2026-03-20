@@ -903,3 +903,35 @@ class RegionMatchTerminationMetric(TerminationTruncationMetric, ABC):
             if matches:
                 return True
         return False
+
+
+class RegionMatchTerminationOnlyMetric(TerminationMetric, ABC):
+    """
+    RegionMatchTerminationMetric with no truncation.
+    No truncation.
+    """
+
+    _TERMINATION_NAMED_REGION = None
+    _TERMINATION_TARGET_NAME = None
+
+    def determine_terminated(self, current_frame, recent_frames):
+        if (
+            self._TERMINATION_NAMED_REGION is None
+            or self._TERMINATION_TARGET_NAME is None
+        ):
+            log_error(
+                "Must set _TERMINATION_NAMED_REGION and _TERMINATION_TARGET_NAME.",
+                self._parameters,
+            )
+        all_frames = [current_frame]
+        if recent_frames is not None:
+            all_frames = recent_frames
+        for frame in all_frames:
+            matches = self.state_parser.named_region_matches_multi_target(
+                frame,
+                self._TERMINATION_NAMED_REGION,
+                self._TERMINATION_TARGET_NAME,
+            )
+            if matches:
+                return True
+        return False

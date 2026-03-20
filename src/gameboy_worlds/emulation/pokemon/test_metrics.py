@@ -2,10 +2,9 @@ from typing import Optional
 
 from gameboy_worlds.emulation.pokemon.parsers import PokemonRedStateParser
 from gameboy_worlds.emulation.tracker import (
-    RegionMatchTerminationMetric,
-    RegionMatchTruncationMetric,
-    TerminationTruncationMetric,
+    RegionMatchTerminationOnlyMetric,
     TerminationMetric,
+    RegionMatchTerminationMetric,
 )
 from gameboy_worlds.emulation.pokemon.base_metrics import (
     PokemonExitBattleTruncationMetric,
@@ -13,57 +12,49 @@ from gameboy_worlds.emulation.pokemon.base_metrics import (
 import numpy as np
 
 
-class PokemonCenterTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+class PokemonCenterTerminateMetric(RegionMatchTerminationOnlyMetric):
     REQUIRED_PARSER = PokemonRedStateParser
 
     _TERMINATION_NAMED_REGION = "screen_bottom_half"
     _TERMINATION_TARGET_NAME = "viridian_pokemon_center_entrance"
 
 
-class MtMoonTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+class MtMoonTerminateMetric(RegionMatchTerminationOnlyMetric):
     REQUIRED_PARSER = PokemonRedStateParser
 
     _TERMINATION_NAMED_REGION = "screen_bottom_half"
     _TERMINATION_TARGET_NAME = "mt_moon_entrance"
 
 
-class SpeakToBillCompleteTerminateMetric(
-    RegionMatchTerminationMetric, TerminationMetric
-):
+class SpeakToBillCompleteTerminateMetric(RegionMatchTerminationOnlyMetric):
     REQUIRED_PARSER = PokemonRedStateParser
 
     _TERMINATION_NAMED_REGION = "dialogue_box_middle"
     _TERMINATION_TARGET_NAME = "talk_bill_complete"
 
 
-class PickupPokeballTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+class PickupPokeballTerminateMetric(RegionMatchTerminationOnlyMetric):
     REQUIRED_PARSER = PokemonRedStateParser
 
     _TERMINATION_NAMED_REGION = "dialogue_box_middle"
     _TERMINATION_TARGET_NAME = "pick_up_pokeball_starting"
 
 
-class ReadTrainersTipsSignTerminateMetric(
-    RegionMatchTerminationMetric, TerminationMetric
-):
+class ReadTrainersTipsSignTerminateMetric(RegionMatchTerminationOnlyMetric):
     REQUIRED_PARSER = PokemonRedStateParser
 
     _TERMINATION_NAMED_REGION = "dialogue_box_middle"
     _TERMINATION_TARGET_NAME = "trainers_tips_sign"
 
 
-class SpeakToCinnabarGymAideCompleteTerminateMetric(
-    RegionMatchTerminationMetric, TerminationMetric
-):
+class SpeakToCinnabarGymAideCompleteTerminateMetric(RegionMatchTerminationOnlyMetric):
     REQUIRED_PARSER = PokemonRedStateParser
 
     _TERMINATION_NAMED_REGION = "dialogue_box_middle"
     _TERMINATION_TARGET_NAME = "cinnabar_gym_aid_complete"
 
 
-class SpeakToCinnabarMonkTerminateMetric(
-    RegionMatchTerminationMetric, TerminationMetric
-):
+class SpeakToCinnabarMonkTerminateMetric(RegionMatchTerminationOnlyMetric):
     REQUIRED_PARSER = PokemonRedStateParser
 
     _TERMINATION_NAMED_REGION = "dialogue_box_middle"
@@ -88,32 +79,32 @@ class DefeatedLassTerminateMetric(
     _TERMINATION_TARGET_NAME = "defeated_lass"
 
 
-class CaughtPidgeyTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+class CaughtPidgeyTerminateMetric(
+    RegionMatchTerminationMetric, PokemonExitBattleTruncationMetric
+):
     REQUIRED_PARSER = PokemonRedStateParser
 
     _TERMINATION_NAMED_REGION = "dialogue_box_middle"
     _TERMINATION_TARGET_NAME = "caught_pidgey"
 
 
-class CaughtPikachuTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+class CaughtPikachuTerminateMetric(
+    RegionMatchTerminationMetric, PokemonExitBattleTruncationMetric
+):
     REQUIRED_PARSER = PokemonRedStateParser
 
     _TERMINATION_NAMED_REGION = "dialogue_box_middle"
     _TERMINATION_TARGET_NAME = "caught_pikachu"
 
 
-class BoughtPotionAtPewterPokemartTerminateMetric(
-    RegionMatchTerminationMetric, TerminationMetric
-):
+class BoughtPotionAtPewterPokemartTerminateMetric(RegionMatchTerminationOnlyMetric):
     REQUIRED_PARSER = PokemonRedStateParser
 
     _TERMINATION_NAMED_REGION = "screen_bottom_half"
     _TERMINATION_TARGET_NAME = "bought_potion_at_pewter_pokemart"
 
 
-class UsedPotionOnCharmanderTerminateMetric(
-    RegionMatchTerminationMetric, TerminationMetric
-):
+class UsedPotionOnCharmanderTerminateMetric(RegionMatchTerminationOnlyMetric):
     REQUIRED_PARSER = PokemonRedStateParser
 
     _TERMINATION_NAMED_REGION = "dialogue_box_middle"
